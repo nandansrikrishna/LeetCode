@@ -13,16 +13,15 @@ public:
             return false;
         }
 
-        ListNode *fast = head;
+        ListNode *fast = head->next;
         ListNode *slow = head;
 
         while (fast && fast->next) {
-            fast = fast->next->next;
-            slow = slow->next;
-
             if (fast == slow) {
                 return true;
             }
+            fast = fast->next->next;
+            slow = slow->next;
         }
         return false;
     }
