@@ -1,36 +1,18 @@
 class Solution {
 public:
-    bool backspaceCompare(string s, string t) {
-        string s_res = "";
-        string t_res = "";
-
+    string decipher(string s) {
+        int curr = 0;
         for (int i = 0; i < s.size(); ++i) {
             if (s[i] == '#') {
-                if (!s_res.empty()) {
-                    s_res.pop_back();
-                }
+                curr = max(0, --curr);
             }
             else {
-                s_res += s[i];
+                s[curr++] = s[i];
             }
-        } 
-        cout << s_res << endl;
-        for (int i = 0; i < t.size(); ++i) {
-            if (t[i] == '#') {
-                if (!t_res.empty()) {
-                    t_res.pop_back();
-                }
-            }
-            else {
-                t_res += t[i];
-            }
-        } 
-        //cout << r_res << endl;
-        if (s_res == t_res) {
-            return true;
         }
-        else {
-            return false;
-        }
+        return s.substr(0,curr);
+    }
+    bool backspaceCompare(string s, string t) {
+        return decipher(s) == decipher(t);
     }
 };
