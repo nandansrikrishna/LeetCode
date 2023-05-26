@@ -10,40 +10,20 @@
  * };
  */
 class Solution {
+private:
+    int diameter = -1;
 public:
     int diameterOfBinaryTree(TreeNode* root) {
-        if (!root) {
-            return 0;
-        }
-        int max = 0;
-        std::queue<TreeNode*> level_queue;
-        level_queue.push(root);
-
-        while (!level_queue.empty()) 
-        {
-            TreeNode *top = level_queue.front();
-            level_queue.pop();
-            int diameter = 0;
-            diameter += height(top->left);
-            diameter += height(top->right);
-            if (diameter > max) {
-                max = diameter;
-            }
-            if (top->left != NULL) {
-                level_queue.push(top->left);
-            }
-            if (top->right != NULL) {
-                level_queue.push(top->right);
-            }
-        }
-        return max;
+        recursive_diameter(root);
+        return diameter;
     }
-    int height(TreeNode* root) {
+    int recursive_diameter(TreeNode* root) {
         if (!root) {
             return 0;
         }
-        int left_height = height(root->left);
-        int right_height = height(root->right);
+        int left_height = recursive_diameter(root->left);
+        int right_height = recursive_diameter(root->right);
+        diameter = max(diameter, left_height + right_height);
         return max(left_height, right_height) + 1;
     }
 };
