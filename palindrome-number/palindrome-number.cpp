@@ -1,14 +1,20 @@
 class Solution {
 public:
     bool isPalindrome(int x) {
-        string s = to_string(x);
+        // Reconstruct number from right side of original pushing to left
 
-        for (int i = 0; i < s.size() / 2; ++i) {
-            if (s[i] != s[s.size() - 1 - i]) {
-                return false;
-            }
+        if (x < 0 || (x > 0 && x%10 == 0)) {
+            return false;
+        }
+        
+        int num = x;
+        long reverse = 0;
+
+        while (num != 0) {
+            reverse = (reverse * 10) + (num%10);
+            num /= 10;
         }
 
-        return true;
+        return x == reverse;
     }
 };
