@@ -1,20 +1,25 @@
 class Solution {
 public:
-    int memo(int n, vector<int> &dp) {
-        if (n <= 1) {
+    int climbStairs(int n) {
+        vector<int> memo;
+        memo.resize(n + 1);
+
+        if (n == 1) {
             return 1;
         }
-        else if (n == 2) {
+
+        if (n == 2) {
             return 2;
         }
-        if (dp[n] != -1) {
-            return dp[n];
-        }
-        return dp[n] = memo(n - 1, dp) + memo(n - 2, dp);
-    }
+        
+        memo[1] = 1;
+        memo[2] = 2;
 
-    int climbStairs(int n) {
-        vector<int> dp(n+1, -1);
-        return memo(n, dp);
+
+        for (int i = 3; i <= n; i++) {
+            memo[i] = memo[i-2] + memo[i - 1];
+        }
+
+        return memo[n];
     }
 };
