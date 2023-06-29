@@ -1,19 +1,21 @@
 class Solution {
 public:
     int search(vector<int>& nums, int target) {
-        int lower = 0;
-        int upper = nums.size() - 1;
+        int left = 0;
+        int right = nums.size() - 1;
+        int partition = (left + right) / 2;
 
-        while (lower <= upper) {
-            int curr = lower + (upper - lower) / 2;
-            if (nums[curr] == target) {
-                return curr;
+        while (left <= right) {
+            if (nums[partition] > target) {
+                right = partition - 1;
+                partition = (left + right) / 2;
             }
-            else if (nums[curr] > target) {
-                upper = curr - 1;
+            else if (nums[partition] < target) {
+                left = partition + 1;
+                partition = (left + right) / 2;
             }
             else {
-                lower = curr + 1;
+                return partition;
             }
         }
 
