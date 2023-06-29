@@ -1,9 +1,6 @@
 class Solution {
 public:
     int climbStairs(int n) {
-        vector<int> memo;
-        memo.resize(n + 1);
-
         if (n == 1) {
             return 1;
         }
@@ -11,6 +8,9 @@ public:
         if (n == 2) {
             return 2;
         }
+
+        vector<int> memo;
+        memo.resize(n + 1);
         
         memo[1] = 1;
         memo[2] = 2;
